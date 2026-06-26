@@ -1,0 +1,66 @@
+<div class="videoteca-wrapper">
+  <header class="video-header">
+    <a class="btn-regresar" routerLink="/blog">
+      <i class="fas fa-chevron-left"></i> 
+      VOLVER
+    </a>
+    <h2 class="fuente-elegante">Aula Virtual</h2>
+    <p>Lecciones grabadas en la frecuencia del bienestar.</p>
+  </header>
+
+  <main class="grid-videos">
+    @for (video of listaVideos; track video.id) {
+      <article
+        class="video-card-glass"
+        role="button"
+        tabindex="0"
+        (click)="abrirReproductor(video.youtubeId)"
+        (keydown.enter)="abrirReproductor(video.youtubeId)"
+        (keydown.space)="abrirReproductor(video.youtubeId)">
+
+        <div class="thumb-container">
+          <img [src]="video.miniatura" [alt]="video.titulo">
+
+          <div class="overlay-cristal">
+            <div class="play-icon">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+
+          <span class="duracion-badge">{{ video.duracion }}</span>
+        </div>
+
+        <div class="video-info">
+          <span class="cat-label">{{ video.categoria }}</span>
+          <h3>{{ video.titulo }}</h3>
+          <p>Publicado por {{ video.autor }}</p>
+        </div>
+      </article>
+    }
+  </main>
+</div>
+@if (mostrarModal) {
+  <div class="modal-overlay" (click)="cerrarReproductor()">
+    <div class="modal-content-glass" (click)="$event.stopPropagation()">
+      <button
+        type="button"
+        class="btn-cerrar"
+        (click)="cerrarReproductor()"
+        aria-label="Cerrar reproductor">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="video-container">
+        @if (videoSeleccionado) {
+          <iframe
+            [src]="videoSeleccionado"
+            title="Reproductor de video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        }
+      </div>
+    </div>
+  </div>
+}

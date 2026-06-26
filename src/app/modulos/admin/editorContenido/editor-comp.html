@@ -1,0 +1,302 @@
+<div class="editor-container">
+  <header class="editor-header">
+    <div>
+      <h2>Crónicas Editoriales</h2>
+
+      @if (cronica().fechaActualizacion && vistaActiva() === 'editor') {
+        <p class="editor-meta">
+          Última actualización:
+          {{ cronica().fechaActualizacion | date:'short' }}
+          · Estado: {{ cronica().estado }}
+        </p>
+      }
+    </div>
+
+    <div class="editor-actions">
+      <button type="button" class="boton-secundario" (click)="nuevaCronica()">
+        Nueva Crónica
+      </button>
+
+      @if (vistaActiva() === 'editor') {
+        <button
+          type="button"
+          class="boton-principal"
+          [disabled]="!puedeGuardar()"
+          (click)="guardarTrabajo()">
+          {{ textoBotonGuardar() }}
+        </button>
+
+        <button
+          type="button"
+          class="boton-secundario"
+          [disabled]="!puedeGuardar()"
+          (click)="publicarCronica()">
+          Publicar
+        </button>
+      }
+    </div>
+  </header>
+
+  <nav class="editor-tabs" aria-label="Vistas del editor">
+    <button
+      type="button"
+      [class.active]="vistaActiva() === 'editor'"
+      (click)="cambiarVista('editor')">
+      <i class="fas fa-pen-nib"></i>
+      Editor
+    </button>
+
+    <button
+      type="button"
+      [class.active]="vistaActiva() === 'borradores'"
+      (click)="cambiarVista('borradores')">
+      <i class="fas fa-folder-open"></i>
+      Borradores
+      <span class="contador-tab">{{ borradores().length }}</span>
+    </button>
+
+    <button
+      type="button"
+      [class.active]="vistaActiva() === 'publicaciones'"
+      (click)="cambiarVista('publicaciones')">
+      <i class="fas fa-newspaper"></i>
+      Publicaciones
+      <span class="contador-tab">{{ publicaciones().length }}</span>
+    </button>
+  </nav>
+
+  @if (mensajeSistema()) {
+    <div class="mensaje-sistema">
+      {{ mensajeSistema() }}
+    </div>
+  }
+
+  @if (vistaActiva() === 'editor') {
+
+    <div
+      class="contexto-edicion"
+      [class.es-borrador]="cronica().origen === 'borrador'"
+      [class.es-publicacion]="cronica().origen === 'publicacion'"
+      [class.es-nueva]="cronica().origen === 'nuevo'">
+      <i
+        class="fas"
+        [class.fa-file-circle-plus]="cronica().origen === 'nuevo'"
+        [class.fa-folder-open]="cronica().origen === 'borrador'"
+        [class.fa-newspaper]="cronica().origen === 'publicacion'">
+      </i>
+
+      <div>
+        <strong>{{ textoModoEdicion() }}</strong>
+        <span>{{ descripcionModoEdicion() }}</span>
+      </div>
+    </div>
+
+    <div class="editor-grid">
+      <section class="main-editor-glass">
+        <input
+          type="text"
+          placeholder="Título de la crónica..."
+          class="input-invisible-titulo"
+          [ngModel]="cronica().titulo"
+          (ngModelChange)="actualizarTitulo($event)">
+
+        <div class="rich-text-area">
+          <textarea
+            placeholder="Comienza a escribir el contenido aquí..."
+            [ngModel]="cronica().contenido"
+            (ngModelChange)="actualizarContenido($event)">
+          </textarea>
+        </div>
+      </section>
+
+      <aside class="editor-sidebar">
+        <div class="card-ia-seo">
+          <div class="ia-header">
+            <i class="fas fa-robot"></i>
+            <span>Asistente SEO Python</span>
+          </div>
+
+          <p>Optimiza el texto y genera etiquetas editoriales.</p>
+
+          <button
+            type="button"
+            class="btn-ia-magic"
+            [disabled]="analizandoSeo()"
+            (click)="generarTagsSeo()">
+            <i class="fas fa-magic"></i>
+            {{ analizandoSeo() ? 'Analizando...' : 'Analizar y Generar Tags' }}
+          </button>
+
+          <div class="ia-results-placeholder">
+            @if (cronica().tags.length) {
+              @for (tag of cronica().tags; track tag) {
+                <span class="tag-ai">{{ tag }}</span>
+              }
+            } @else {
+              <span class="tag-ai">#SaludNatural</span>
+              <span class="tag-ai">#Autocuidado</span>
+            }
+          </div>
+        </div>
+
+        <div class="card-settings-glass">
+          <label for="categoria-cronica">Categoría Principal</label>
+          <select
+            id="categoria-cronica"
+            [ngModel]="cronica().categoria"
+            (ngModelChange)="actualizarCategoria($event)">
+            @for (categoria of categorias; track categoria) {
+              <option [value]="categoria">{{ categoria }}</option>
+            }
+          </select>
+
+          <label>Imagen de Portada</label>
+          <button
+            type="button"
+            class="drop-zone"
+            (click)="simularImagenPortada()">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>
+              {{ cronica().imagenPortada ? 'Imagen asignada' : 'Subir imagen' }}
+            </span>
+          </button>
+
+          @if (cronica().imagenPortada) {
+            <div class="preview-portada">
+              <img [src]="cronica().imagenPortada" alt="Vista previa de portada">
+            </div>
+          }
+        </div>
+      </aside>
+    </div>
+  }
+
+  @if (vistaActiva() === 'borradores') {
+    <section class="borradores-panel">
+      <div class="borradores-header">
+        <div>
+          <h3 class="fuente-elegante">Borradores guardados</h3>
+          <p>Revisa documentos pendientes y vuelve al editor para continuar trabajando.</p>
+        </div>
+      </div>
+
+      @if (borradoresOrdenados().length) {
+        <div class="borradores-grid">
+          @for (borrador of borradoresOrdenados(); track borrador.id) {
+            <article class="borrador-card-glass">
+              <div class="borrador-top">
+                <span class="tag-ai">{{ borrador.categoria }}</span>
+
+                @if (borrador.fechaActualizacion) {
+                  <small>{{ borrador.fechaActualizacion | date:'short' }}</small>
+                }
+              </div>
+
+              <h4>{{ borrador.titulo }}</h4>
+              <p>{{ obtenerExtracto(borrador.contenido) }}</p>
+
+              <div class="borrador-tags">
+                @for (tag of borrador.tags; track tag) {
+                  <span class="tag-ai">{{ tag }}</span>
+                }
+              </div>
+
+              <div class="borrador-actions">
+                <button
+                  type="button"
+                  class="boton-principal"
+                  (click)="editarBorrador(borrador)">
+                  Editar
+                </button>
+
+                <button
+                  type="button"
+                  class="boton-secundario"
+                  (click)="eliminarBorrador(borrador.id!)">
+                  Eliminar
+                </button>
+              </div>
+            </article>
+          }
+        </div>
+      } @else {
+        <div class="estado-vacio">
+          <i class="fas fa-folder-open"></i>
+          <h3>No hay borradores guardados</h3>
+          <p>Guarda una crónica como borrador para verla en esta sección.</p>
+          <button type="button" class="boton-principal" (click)="cambiarVista('editor')">
+            Volver al editor
+          </button>
+        </div>
+      }
+    </section>
+  }
+
+  @if (vistaActiva() === 'publicaciones') {
+    <section class="borradores-panel">
+      <div class="borradores-header">
+        <div>
+          <h3 class="fuente-elegante">Publicaciones existentes</h3>
+          <p>Consulta las crónicas publicadas y edita el contenido que ya aparece en la demo.</p>
+        </div>
+      </div>
+
+      @if (publicacionesOrdenadas().length) {
+        <div class="borradores-grid">
+          @for (publicacion of publicacionesOrdenadas(); track publicacion.id) {
+            <article class="borrador-card-glass publicacion-card">
+              <div class="borrador-top">
+                <span class="tag-ai">{{ publicacion.categoria }}</span>
+
+                @if (publicacion.fechaActualizacion) {
+                  <small>{{ publicacion.fechaActualizacion | date:'short' }}</small>
+                }
+              </div>
+
+              <h4>{{ publicacion.titulo }}</h4>
+              <p>{{ obtenerExtracto(publicacion.contenido) }}</p>
+
+              <div class="borrador-tags">
+                @for (tag of publicacion.tags; track tag) {
+                  <span class="tag-ai">{{ tag }}</span>
+                }
+              </div>
+
+              <div class="borrador-actions acciones-publicacion">
+                <button
+                  type="button"
+                  class="boton-principal"
+                  (click)="editarPublicacion(publicacion)">
+                  Editar
+                </button>
+
+                <button
+                  type="button"
+                  class="boton-secundario"
+                  (click)="pasarPublicacionABorrador(publicacion)">
+                  Pasar a borrador
+                </button>
+
+                <button
+                  type="button"
+                  class="boton-secundario"
+                  (click)="eliminarPublicacion(publicacion.id!)">
+                  Eliminar
+                </button>
+              </div>
+            </article>
+          }
+        </div>
+      } @else {
+        <div class="estado-vacio">
+          <i class="fas fa-newspaper"></i>
+          <h3>No hay publicaciones activas</h3>
+          <p>Publica una crónica desde el editor para verla en esta sección.</p>
+          <button type="button" class="boton-principal" (click)="cambiarVista('editor')">
+            Volver al editor
+          </button>
+        </div>
+      }
+    </section>
+  }
+</div>

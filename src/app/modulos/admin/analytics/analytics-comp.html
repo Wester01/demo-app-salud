@@ -1,0 +1,118 @@
+<div class="analytics-container">
+  <header class="stats-grid">
+    <div class="stat-card-glass" *ngFor="let stat of stats">
+      <div class="stat-header">
+        <i [class]="stat.icono"></i>
+
+        <span
+          class="tendencia"
+          [class.sube]="stat.tendencia.includes('+')"
+          [class.neutra]="!stat.tendencia.includes('+')">
+          {{ stat.tendencia }}
+        </span>
+      </div>
+
+      <div class="stat-body">
+        <h3>{{ stat.valor }}</h3>
+        <p>{{ stat.label }}</p>
+      </div>
+
+      <div class="info-helper">
+        <i class="fas fa-question-circle"></i>
+        <span class="tooltip-text">Datos calculados desde el estado actual de la demo</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="charts-layout">
+    <div class="chart-card-main-glass">
+      <div class="chart-title">
+        <div>
+          <h4>Actividad del Sistema</h4>
+          <p>Lectura simulada a partir de publicaciones, usuarios y videoteca.</p>
+        </div>
+
+        <div class="period-selector">
+          <button type="button" class="btn-period active">Demo</button>
+          <button type="button" class="btn-period">CMS</button>
+          <button type="button" class="btn-period">Admin</button>
+        </div>
+      </div>
+
+      <div class="visual-placeholder">
+        <div class="mock-chart-bars">
+          <div
+            class="bar"
+            *ngFor="let altura of actividadSemanal; let i = index"
+            [class.highlight]="i === 3"
+            [style.height.%]="altura">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="top-content-glass">
+      <h4>Crónicas Publicadas</h4>
+
+      <table class="admin-table" *ngIf="topArticulos.length; else sinArticulos">
+        <thead>
+          <tr>
+            <th>TÍTULO</th>
+            <th>VISITAS</th>
+            <th>%</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let art of topArticulos">
+            <td>{{ art.titulo }}</td>
+            <td>{{ art.visitas }}</td>
+            <td>
+              <span class="badge-glow">{{ art.conversion }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #sinArticulos>
+        <div class="estado-vacio-analytics">
+          <i class="fas fa-newspaper"></i>
+          <p>No hay publicaciones activas.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <section class="interacciones-card-glass">
+    <div class="interacciones-header">
+      <div>
+        <h4>Interacciones Recientes</h4>
+        <p>Mensajes de contacto y suscripciones registradas desde el portal público.</p>
+      </div>
+    </div>
+
+    @if (interaccionesRecientes.length) {
+      <div class="interacciones-lista">
+        @for (interaccion of interaccionesRecientes; track interaccion.tipo + '-' + interaccion.id) {
+          <article class="interaccion-item">
+            <div class="interaccion-icono">
+              <i [class]="interaccion.icono"></i>
+            </div>
+
+            <div>
+              <strong>{{ interaccion.titulo }}</strong>
+              <span>{{ interaccion.detalle }}</span>
+            </div>
+
+            <small>{{ interaccion.fecha | date:'short' }}</small>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="estado-vacio-analytics">
+        <i class="fas fa-inbox"></i>
+        <p>No hay interacciones recientes.</p>
+      </div>
+    }
+  </section>
+</div>

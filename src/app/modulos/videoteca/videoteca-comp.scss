@@ -1,0 +1,244 @@
+/* --- 1. VARIABLES Y WRAPPER PRINCIPAL --- */
+.videoteca-wrapper {
+  padding-top: 140px;
+  min-height: 100vh;
+  background: var(--color-fondo); // Asegúrate de que apunta a tu azul/negro profundo
+  padding-bottom: 5rem;
+  position: relative;
+}
+
+/* --- 2. CABECERA DE SECCIÓN --- */
+.video-header {
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+  text-align: center;
+
+  .btn-regresar {
+    text-decoration: none;
+    background: rgba(106, 90, 205, 0.1);
+    border: 1px solid rgba(106, 90, 205, 0.2);
+    color: var(--color-primario);
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    margin-bottom: 2rem;
+
+    &:hover {
+      background: rgba(106, 90, 205, 0.2);
+      transform: translateX(-5px);
+      border-color: var(--color-acento);
+    }
+  }
+
+  h2 {
+    font-size: 3.5rem;
+    color: var(--color-primario);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: var(--color-acento);
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+}
+
+/* --- 3. GRID DE VÍDEOS (AUTÓNOMO) --- */
+.grid-videos {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  // auto-fill para que se ajusten solos según el tamaño de pantalla
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 3rem;
+  padding: 0 2rem;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- 4. TARJETA DE VÍDEO (ESTILO CRISTAL) --- */
+.video-card-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+
+  .thumb-container {
+    position: relative;
+    aspect-ratio: 16 / 9; // Formato cine obligado
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.8s ease;
+    }
+
+    .overlay-cristal {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 5, 20, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0; // Oculto por defecto
+      transition: 0.4s;
+
+      .play-icon {
+        width: 70px;
+        height: 70px;
+        background: rgba(106, 90, 205, 0.4);
+        backdrop-filter: blur(10px);
+        border: 2px solid white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 30px rgba(106, 90, 205, 0.5);
+
+        i {
+          color: white;
+          font-size: 1.8rem;
+          margin-left: 5px; // Ajuste óptico para centrar el triángulo
+        }
+      }
+    }
+
+    .duracion-badge {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      color: white;
+      font-weight: bold;
+    }
+  }
+
+  .video-info {
+    padding: 2rem;
+    flex-grow: 1;
+
+    .cat-label {
+      color: var(--color-acento);
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      margin: 0.8rem 0;
+      line-height: 1.3;
+      color: var(--color-primario);
+    }
+
+    p {
+      font-size: 0.85rem;
+      opacity: 0.6;
+      color: var(--color-primario);
+    }
+  }
+
+  /* Efectos Hover */
+  &:hover {
+    transform: translateY(-12px);
+    border-color: var(--color-acento);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+    .overlay-cristal {
+      opacity: 1;
+    }
+
+    img {
+      transform: scale(1.1);
+      filter: blur(2px);
+    }
+  }
+}
+
+/* --- 5. MODAL DE REPRODUCCIÓN (FULL SCREEN CRISTAL) --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 5, 25, 0.95); // Fondo muy oscuro para centrar la atención
+  backdrop-filter: blur(20px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content-glass {
+  width: 100%;
+  max-width: 1100px;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 0 100px rgba(106, 90, 205, 0.2);
+
+  .btn-cerrar {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      color: var(--color-acento);
+      transform: rotate(90deg);
+    }
+  }
+
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%; // 16:9 Aspect Ratio
+    height: 0;
+    border: solid 1.5px var(--color-acento);
+    border-radius: 22px;
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+    }
+  }
+}
+
+/* --- 6. ANIMACIONES --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

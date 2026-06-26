@@ -1,0 +1,35 @@
+<div class="lista-cursos">
+  @for (curso of cursos; track curso.id) {
+    <div class="tarjeta-curso-cristal" [class.expandida]="cursoAbierto() === curso.id">
+      
+      <div class="header-curso" (click)="toggleCurso(curso.id)">
+        <div class="titulo-grupo">
+          <span class="numero-curso">0{{curso.id}}</span>
+          <h3>{{curso.titulo}}</h3>
+        </div>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+
+      <div class="contenido-curso-wrapper">
+        <div class="contenido-curso">
+          
+          <p class="descripcion-curso">{{curso.descripcion}}</p>
+          
+          <div class="grid-modulos">
+            @for (mod of curso.modulos; track mod; let i = $index) {
+              <div class="modulo-item">
+                <span class="mod-num">{{i + 1}}</span>
+                <span class="mod-text">{{mod}}</span>
+              </div>
+            }
+          </div>
+
+          <div class="info-adicional">
+            <p><i class="fas fa-file-pdf"></i> PDF Mensual Exclusivo</p>
+            <p><i class="fas fa-video"></i> Vídeo por módulo</p>
+            <p><i class="fab fa-whatsapp"></i> Tutorías directas</p>
+          </div>
+
+        </div> </div> </div>
+  }
+</div>

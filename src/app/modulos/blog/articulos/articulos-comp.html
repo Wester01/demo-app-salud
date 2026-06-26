@@ -1,0 +1,62 @@
+<div class="main-articulos-wrapper">
+  <div class="contenedor-centrado">
+    
+    <header class="blog-nav-header">
+      <div class="nav-top">
+        <button class="btn-regresar" routerLink="/blog">
+          <i class="fas fa-arrow-left"></i>
+          <span>VOLVER AL SELECTOR</span>
+        </button>
+          <div class="blog-info-meta">
+            <span class="label">BIBLIOTECA DE SABIDURÍA</span>
+          </div>
+      </div>
+
+      <h2 class="fuente-elegante">Crónicas de Salud Natural</h2>
+        
+
+      <nav class="categorias-bar">
+        <div class="scroll-container">
+          @for (categoria of categorias; track categoria) {
+            <button
+              type="button"
+              (click)="filtrar(categoria)"
+              [class.active]="categoriaSeleccionada === categoria"
+              class="cat-item">
+              {{ categoria === 'TODAS' ? 'TODAS LAS ENTRADAS' : categoria }}
+            </button>
+          }
+        </div>
+      </nav>
+    </header>
+
+    <main class="grid-articulos-dinamico">
+      @for (articulo of articulosFiltrados; track articulo.slug) {
+        <article class="card-cristal-blog" [routerLink]="['/blog/leer', articulo.slug]">
+          <div class="brillo-especular"></div>
+
+          <div class="media-container">
+            <img [src]="articulo.imagen" [alt]="articulo.titulo">
+            <span class="categoria-tag">{{ articulo.categoria }}</span>
+          </div>
+
+          <div class="info-container">
+            <div class="top-meta">
+              <span><i class="far fa-eye"></i> {{ articulo.visitas }}</span>
+              <span class="dot">•</span>
+              <span>{{ articulo.fecha }}</span>
+            </div>
+
+            <h3 class="fuente-elegante">{{ articulo.titulo }}</h3>
+            <p>{{ articulo.resumen }}</p>
+
+            <div class="cta-link">
+              <span>CONTINUAR LECTURA</span>
+              <i class="fas fa-long-arrow-alt-right"></i>
+            </div>
+          </div>
+        </article>
+      }
+    </main>
+  </div>
+</div>

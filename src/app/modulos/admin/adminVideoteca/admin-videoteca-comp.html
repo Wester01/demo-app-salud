@@ -1,0 +1,116 @@
+<div class="admin-videoteca-container">
+  <header class="videoteca-header">
+    <div class="titulo-seccion">
+      <h2>Gestión de Videoteca</h2>
+      <p>Administra el contenido audiovisual del Oráculo</p>
+    </div>
+    <button type="button" class="boton-principal" (click)="abrirModal()">
+      <i class="fas fa-cloud-upload-alt"></i> Subir Nuevo Video
+    </button>
+  </header>
+
+  <section class="video-grid">
+    <div class="video-card-glass" *ngFor="let video of catalogoVideos">
+      <div class="video-thumbnail">
+        <img [src]="video.thumb" [alt]="video.titulo">
+        <div class="video-overlay">
+          <i class="fas fa-play-circle"></i>
+        </div>
+        <span class="video-duration">{{ video.duracion }}</span>
+      </div>
+      
+      <div class="video-info">
+        <span class="video-category">{{ video.categoria }}</span>
+        <h3>{{ video.titulo }}</h3>
+        <div class="video-meta">
+          <span><i class="fas fa-chart-bar"></i> {{ video.vistas }} reproducciones</span>
+          <div class="video-actions">
+            <button type="button" class="btn-icon" title="Editar" (click)="editarVideo(video)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="btn-icon btn-danger" title="Eliminar" (click)="eliminarVideo(video.id)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="modal-overlay" *ngIf="showModal" (click)="showModal = false">
+  <div class="modal-content-glass" (click)="$event.stopPropagation()">
+    <header class="modal-header">
+      <h3>
+        <i class="fas fa-magic"></i> 
+        {{ videoEditandoId ? 'Editar Video' : 'Subir Nuevo Video' }}
+      </h3>
+      <div class="tab-selector">
+        <button type="button"  [class.active]="activeTab === 'youtube'" (click)="cambiarTab('youtube')">
+          <i class="fab fa-youtube"></i> YouTube
+        </button>
+        <button type="button" [class.active]="activeTab === 'file'" (click)="cambiarTab('file')">
+          <i class="fas fa-file-upload"></i> Archivo
+        </button>
+      </div>
+    </header>
+
+    <div class="modal-body">
+      <div class="tab-content" *ngIf="activeTab === 'youtube'">
+        <div class="input-group">
+          <label>Enlace del Video</label>
+          <div class="input-with-icon">
+            <i class="fab fa-youtube"></i>
+            <input type="text" placeholder="https://www.youtube.com/watch?v=..." [(ngModel)]="formulario.urlYoutube">
+          </div>
+          <p class="input-hint">La demo extrae el ID y la miniatura. La duración puede completarse manualmente.</p>
+        </div>
+      </div>
+
+      <div class="tab-content" *ngIf="activeTab === 'file'">
+        <div class="upload-dropzone">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Arrastra el video o <span>busca en tu PC</span></p>
+        </div>
+      </div>
+
+      <div class="upload-form">
+        <div class="input-group">
+          <label>Título de la Lección</label>
+          <input type="text" placeholder="Ej: Las 12 zonas del iris..." [(ngModel)]="formulario.titulo" name="titulo">
+        </div>
+        <div class="input-group">
+          <label>Categoría</label>
+          <select [(ngModel)]="formulario.categoria" name="categoria">
+            <option *ngFor="let categoria of categorias" [value]="categoria">
+              {{ categoria }}
+            </option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Duración</label>
+          <input
+            type="text"
+            placeholder="Ej: 12:45"
+            [(ngModel)]="formulario.duracion"
+            name="duracion">
+        </div>
+
+      </div>
+    </div>
+
+    <p class="mensaje-error" *ngIf="mensajeError">
+      {{ mensajeError }}
+    </p>
+
+    <footer class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="cerrarModal()">
+        Descartar
+      </button>
+
+      <button type="button" class="btn-upload-confirm" (click)="guardarVideo()">
+        {{ videoEditandoId ? 'Guardar cambios' : 'Añadir a la Videoteca' }}
+      </button>
+    </footer>
+  </div>
+</div>

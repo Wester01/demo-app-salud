@@ -1,0 +1,161 @@
+.pie-pagina {
+  background: rgba(253, 251, 255, 0.75);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(106, 90, 205, 0.1);
+  padding: 5rem 0 2rem 0;
+  color: var(--color-primario);
+  position:relative;
+/* background-image: url("../../../../assets/img/pie1.png");
+    background-size: cover;
+    background-position: center;
+
+*/
+  //text-shadow: 0 1px 3px rgba(106, 90, 205, 0.2); // Sombra de texto lavanda suave
+  text-shadow: 0 1px 4px rgba(253, 251, 255, 0.8);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 3rem;
+  margin-bottom: 4rem;
+
+  position:relative;
+  z-index:10;
+  
+  h3, h4 { color: var(--color-acento); margin-bottom: 1.5rem; }
+  ul { list-style: none; padding: 0; 
+    li { margin-bottom: 0.8rem; 
+      a { color: var(--color-primario); text-decoration: none; transition: 0.3s;
+        &:hover { color: var(--color-acento); padding-left: 5px; }
+      }
+    }
+  }
+  ul li a {
+    position: relative;
+    z-index: 11;
+    display: inline-block; // Asegura que el área de clic sea sólida
+    cursor: pointer !important;
+    pointer-events: auto !important; // Fuerza a que el ratón lo detecte
+  }
+}
+
+.contacto-directo {
+  h4 {
+    color: var(--color-acento);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: var(--color-primario);
+    transition: transform 0.3s ease;
+
+    i {
+      color: var(--color-acento);
+      font-size: 1rem;
+      width: 20px; // Alineación perfecta de los iconos
+      text-align: center;
+    }
+
+    &:hover {
+      transform: translateX(5px);
+      color: var(--color-acento);
+    }
+  }
+}
+
+/* Enlaces Legales */
+.enlaces-legales {
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  
+  a {
+    color: var(--color-primario);
+    text-decoration: none;
+    transition: 0.3s;
+    &:hover { color: var(--color-acento); }
+  }
+}
+
+
+/* --- La Frase con Importancia --- */
+.frase-inspiradora {
+  text-align: center;
+  padding: 6rem 0; // Margen superior e inferior elevado como pediste
+  border-top: 1px solid rgba(106, 90, 205, 0.05);
+  border-bottom: 1px solid rgba(106, 90, 205, 0.05);
+  margin-bottom: 3rem;
+
+  blockquote {
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--color-acento);
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+  &::after {
+    content: '◈';
+    display: block;
+    margin-top: 2rem;
+    color: var(--color-acento);
+    opacity: 0.3;
+    font-size: 0.8rem;
+  }
+}
+
+/* --- Créditos WesterDEV --- */
+.creditos-desarrollador {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  .icono-cruz {
+    font-size: 1.2rem; // Pequeñito a modo de detalle
+    color: var(--color-acento);
+    opacity: 0.7;
+    margin-bottom: -5px; // Ajuste para que la cruz esté cerca del texto
+    animation: pulseSoft 3s infinite ease-in-out;
+  }
+
+  p {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin: 0;
+    
+    strong {
+      font-weight: 600;
+      color: var(--color-acento);
+    }
+  }
+
+  .copyright {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    margin-top: 1rem;
+  }
+}
+
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .frase-inspiradora blockquote { font-size: 1.4rem; padding: 0 1rem; }
+  .footer-grid { text-align: center; }
+}

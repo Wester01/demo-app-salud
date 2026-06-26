@@ -1,0 +1,159 @@
+.cabecera {
+  background-color: rgba(253, 251, 255, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px); // Compatibilidad Safari
+
+  border-bottom: 1px solid var(--color-secundario);
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  z-index: 1000;
+  border-bottom: 1px solid transparent;
+  transition: all 0.4s ease;
+
+  height: 90px; 
+
+  &.en-scroll {
+    background-color: rgba(253, 251, 255, 0.6); // 60% de opacidad
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    height: 70px; // Se estrecha un poco para dejar más espacio al contenido
+    
+    &:hover {
+      background-color: rgba(253, 251, 255, 0.9); // Recupera solidez al acercar el cursor
+      backdrop-filter: blur(20px);
+    }
+  }
+}
+
+.contenido-cabecera {
+  transition: height 0.4s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.menu-escritorio {
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem; /* Espaciado entre opciones */
+    margin: 0;
+    padding: 0;
+
+    a {
+      text-decoration: none;
+      color: var(--color-acento);
+      font-family: var(--fuente-principal);
+      font-weight: 600;
+      transition: var(--transicion-suave);
+      
+      &:hover {
+        color: var(--color-primario);
+        font-size: 1.05rem;
+      }
+    }
+  }
+}
+
+/* Estilos para el Slide Lateral */
+.menu-movil {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Oculto por defecto a la derecha */
+  width: 280px;
+  height: 100vh;
+  background-color: var(--color-fondo);
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  z-index: 1001;
+  transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: 2rem;
+
+  &.activo {
+    right: 0; /* Aparece deslizando */
+  }
+
+  ul {
+    list-style: none;
+    padding: 2rem 0;
+    li {
+      margin-bottom: 1.5rem;
+      a {
+        font-family: var(--fuente-principal);
+        font-size: 1.2rem;
+        text-decoration: none;
+        color: var(--color-acento);
+      }
+    }
+  }
+}
+
+/* Capa de fondo oscura */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transicion-suave);
+  z-index: 1000;
+
+  &.activo {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Animación básica para el botón hamburguesa */
+.boton-hamburguesa {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none; // Se mostrará en el media query
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 24px;
+  padding: 0;
+  z-index: 1002; // Por encima de todo
+
+  span {
+    width: 30px;
+    height: 2px;
+    background-color: var(--color-acento);
+    border-radius: 10px;
+    transition: var(--transicion-suave);
+    position: relative;
+    transform-origin: 1px; // Punto de pivote para la rotación
+  }
+
+  /* Estado cuando el menú está ABIERTO (Transformación a X) */
+  &.abierto {
+    span:nth-child(1) {
+      transform: rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+      transform: translateX(20px); // La línea central desaparece hacia un lado
+    }
+
+    span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-escritorio { display: none; }
+}
+

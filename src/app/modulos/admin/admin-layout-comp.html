@@ -1,0 +1,40 @@
+<div class="admin-wrapper">
+  <aside class="admin-sidebar-glass">
+    <div class="brand">
+      <img src="logo/logo1.png" alt="Logo">
+      <span>ORÁCULO ADMIN <br> Demo ilustrativa</span>
+    </div>
+    
+    <nav class="admin-nav">
+        <a routerLink="analytics" routerLinkActive="active" class="nav-item">
+            <i class="fas fa-chart-line"></i> 
+            <span>Analytics</span>
+        </a>
+        
+        <a routerLink="cronicas" routerLinkActive="active" class="nav-item">
+            <i class="fas fa-pen-nib"></i> 
+            <span>Crónicas</span>
+        </a>
+        
+        <a routerLink="comunidad" routerLinkActive="active" class="nav-item">
+            <i class="fas fa-users"></i> 
+            <span>Comunidad</span>
+        </a>
+
+        <a routerLink="videoteca" routerLinkActive="active" class="nav-item">
+            <i class="fas fa-video"></i> 
+            <span>Videoteca</span>
+        </a>
+        
+        <div class="ia-section-link">
+            <i class="fas fa-robot"></i> 
+            <span>SEO Automático</span>
+            <span class="tooltip">Programa Python de optimización (Próximamente)</span>
+        </div>
+    </nav>
+  </aside>
+
+    <main class="admin-main-content">
+      <router-outlet></router-outlet> 
+    </main>
+</div>

@@ -1,0 +1,87 @@
+.pie-pagina {
+  background: rgba(253, 251, 255, 0.6); // Cristal más denso para el cierre
+  backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(106, 90, 205, 0.1);
+  padding: 5rem 0 2rem 0;
+  color: var(--color-primario);
+
+/* background-image: url("../../../../assets/img/pie1.png");
+    background-size: cover;
+    background-position: center;
+
+*/
+  //text-shadow: 0 1px 3px rgba(106, 90, 205, 0.2); // Sombra de texto lavanda suave
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 3rem;
+  margin-bottom: 4rem;
+  
+  h3, h4 { color: var(--color-acento); margin-bottom: 1.5rem; }
+  ul { list-style: none; padding: 0; 
+    li { margin-bottom: 0.8rem; 
+      a { color: var(--color-primario); text-decoration: none; transition: 0.3s;
+        &:hover { color: var(--color-acento); padding-left: 5px; }
+      }
+    }
+  }
+}
+
+/* --- La Frase con Importancia --- */
+.frase-inspiradora {
+  text-align: center;
+  padding: 6rem 0; // Margen superior e inferior elevado como pediste
+  border-top: 1px solid rgba(106, 90, 205, 0.05);
+  border-bottom: 1px solid rgba(106, 90, 205, 0.05);
+  margin-bottom: 3rem;
+
+  blockquote {
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--color-acento);
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+}
+
+/* --- Créditos WesterDEV (Detalle Místico) --- */
+.creditos-desarrollador {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  .icono-cruz {
+    font-size: 1.2rem; // Pequeñito a modo de detalle
+    color: var(--color-acento);
+    opacity: 0.7;
+    margin-bottom: -5px; // Ajuste para que la cruz esté cerca del texto
+  }
+
+  p {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin: 0;
+    
+    strong {
+      font-weight: 600;
+      color: var(--color-acento);
+    }
+  }
+
+  .copyright {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    margin-top: 1rem;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .frase-inspiradora blockquote { font-size: 1.4rem; padding: 0 1rem; }
+  .footer-grid { text-align: center; }
+}

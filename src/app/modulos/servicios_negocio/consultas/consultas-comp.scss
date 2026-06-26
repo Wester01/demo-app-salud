@@ -1,0 +1,74 @@
+/* --- Paleta de Accesibilidad --- */
+$sombra-accesibilidad: 0 2px 8px rgba(253, 251, 255, 0.7); // Micro-difuminado lavanda/blanco
+
+
+.consultas-wrapper {
+  padding: 2rem;
+  animation: fadeIn 0.8s ease;
+
+  text-shadow: $sombra-accesibilidad;
+
+  color: var(--color-primario);
+}
+
+.header-consultas {
+  text-align: center;
+  margin-bottom: 5rem;
+  
+  blockquote {
+    text-shadow: 0 3px 12px rgba(106, 90, 205, 0.25), $sombra-accesibilidad;
+
+    font-size: 2rem;
+    color: var(--color-acento);
+    margin-bottom: 2rem;
+    span { display: block; font-size: 1rem; margin-top: 1rem; opacity: 0.7; }
+  }
+}
+
+.grid-cyem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 4rem 0;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
+}
+
+.tarjeta-cyem-cristal {
+  text-shadow: $sombra-accesibilidad;
+
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(106, 90, 205, 0.2);
+  padding: 3rem;
+  border-radius: 30px;
+  text-align: center;
+  transition: var(--transicion-suave);
+
+  i { font-size: 3rem; color: var(--color-acento); margin-bottom: 1.5rem; }
+  h4 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-primario); }
+  
+  &:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.aviso-cuestionario {
+
+  text-shadow: $sombra-accesibilidad;
+
+  text-align: center;
+  margin-top: 4rem;
+  padding: 3rem;
+  background: rgba(106, 90, 205, 0.1);
+  border-radius: 20px;
+
+  p { font-size: 0.9rem; margin-bottom: 2rem; opacity: 0.8; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

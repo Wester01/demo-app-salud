@@ -1,0 +1,45 @@
+<div class="tienda-container">
+  <header class="header-tienda">
+    <h2 class="fuente-elegante">El Boticario Natural</h2>
+    <p>Elaboración artesanal con aceites vegetales ecológicos y bio.</p>
+    
+    <div class="filtros-boticario">
+      <button (click)="categoriaSeleccionada.set('todos')" [class.active]="categoriaSeleccionada() === 'todos'">
+        <i class="fas fa-th-large"></i> Todos
+      </button>
+      <button (click)="categoriaSeleccionada.set('aceites')" [class.active]="categoriaSeleccionada() === 'aceites'">
+        <i class="fas fa-droplet"></i> Aceites
+      </button>
+      <button (click)="categoriaSeleccionada.set('cremas')" [class.active]="categoriaSeleccionada() === 'cremas'">
+        <i class="fas fa-mortar-pestle"></i> Cremas
+      </button>
+      <button (click)="categoriaSeleccionada.set('velas')" [class.active]="categoriaSeleccionada() === 'velas'">
+        <i class="fas fa-fire"></i> Velas
+      </button>
+    </div>
+  </header>
+
+  <div class="grid-productos">
+    @for (prod of productosFiltrados(); track prod.nombre) {
+      <div class="producto-card-cristal">
+        <div class="badge-bio">BIO</div>
+        <img [src]="prod.img" [alt]="prod.nombre">
+        
+        <div class="info-prod">
+          <h3>{{prod.nombre}}</h3>
+          <p class="desc-corta">{{prod.descripcion}}</p>
+          
+          <div class="variantes-precio">
+            @for (p of prod.precios; track p.tamanio) {
+              <div class="precio-item" (click)="pedirPorWhatsapp(prod, p.tamanio)">
+                <span class="ml">{{p.tamanio}}</span>
+                <span class="precio">{{p.valor}}€</span>
+                <i class="fab fa-whatsapp"></i>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

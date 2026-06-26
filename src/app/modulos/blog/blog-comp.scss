@@ -1,0 +1,95 @@
+.main-blog-wrapper {
+  padding-top: 160px;
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% -20%, rgba(106, 90, 205, 0.15), transparent), var(--color-fondo);
+  padding-bottom: 5rem;
+}
+
+.blog-intro {
+  text-align: center;
+  margin-bottom: 5rem;
+  position: relative;
+  
+  .label-místico { color: var(--color-acento); font-weight: bold; letter-spacing: 5px; font-size: 0.7rem; }
+  h2 { font-size: 3.5rem; margin-top: 1rem; color: var(--color-primario); }
+  p { opacity: 0.6; font-style: italic; max-width: 500px; margin: 0 auto; }
+}
+
+.selector-binario {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  @media (max-width: 850px) { grid-template-columns: 1fr; }
+}
+
+/* --- LA TARJETA DE CRISTAL (CORE) --- */
+.cristal-blog-card {
+  position: relative;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.03); // Transparencia base
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+
+  // Brillo que simula la luz pegando en el cristal
+  .brillo-reflejo {
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    transition: 0.8s;
+  }
+
+  .cuerpo-tarjeta {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 3rem;
+
+    .icono-espejo {
+      width: 70px; height: 70px;
+      margin: 0 auto 1.5rem;
+      background: rgba(106, 90, 205, 0.15);
+      border: 1px solid rgba(106, 90, 205, 0.3);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      i { font-size: 1.8rem; color: var(--color-acento); }
+    }
+
+    h3 { font-size: 2rem; margin-bottom: 1rem; color: var(--color-primario); }
+    p { font-size: 1rem; opacity: 0.7; line-height: 1.6; margin-bottom: 2rem; }
+  }
+
+  .accion-cristal {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border: 1px solid rgba(106, 90, 205, 0.4);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: 0.4s;
+  }
+
+  // HOVER: El cristal cobra vida
+  &:hover {
+    transform: translateY(-15px) scale(1.02);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--color-acento);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(106, 90, 205, 0.1);
+
+    .brillo-reflejo { transform: translate(10%, 10%); }
+    .accion-cristal { background: var(--color-acento); color: white; border-color: transparent; }
+    .icono-espejo { transform: rotateY(180deg); transition: 0.6s; }
+  }
+}

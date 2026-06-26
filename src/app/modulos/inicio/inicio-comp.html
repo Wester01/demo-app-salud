@@ -1,0 +1,31 @@
+<section class="hero">
+  <div class="contenedor-centrado contenido-hero">
+    <div class="bloque-texto">
+      <h1 class="titulo-animado">{{ hero.titulo }}</h1>
+      <p class="subtitulo-animado">{{ hero.subtitulo }}</p>
+      <div class="acciones-animadas">
+        <a class="boton-principal" [routerLink]="hero.rutaCtaPrincipal"> {{ hero.ctaPrincipal}} </a>
+        <a class="boton-secundario" [routerLink]="hero.rutaCtaSecundario"> {{ hero.ctaSecundario}} </a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="seccion-noticias">
+  <div class="contenedor-centrado">
+    <h2 class="fuente-elegante titulo-seccion">Actualidad y Bienestar</h2>
+    
+    <div class="rejilla-tarjetas">
+      @for (item of tarjetasInicio; track item.ruta) {
+        <app-tarjeta-comp 
+          [titulo]="item.titulo"
+          [descripcion]="item.descripcion"
+          [imagen]="item.imagen"
+          [etiqueta]="item.etiqueta"
+          [ruta]="item.ruta">
+        </app-tarjeta-comp>
+      }
+    </div>
+  </div>
+</section>
+<app-sobre-mi-comp></app-sobre-mi-comp>
+<app-conexion-comp></app-conexion-comp>

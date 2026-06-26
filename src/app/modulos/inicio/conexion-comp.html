@@ -1,0 +1,70 @@
+<section class="seccion-conexion">
+  <div class="contenedor-centrado">
+    <div class="bloque-conexion-cristal">
+      
+      <div class="noticias">
+        <h3 class="fuente-elegante">{{ contenido.newsletterTitulo }}</h3>
+        <p>{{ contenido.newsletterTexto }}</p>
+        
+        <form class="formulario-newsletter" (ngSubmit)="suscribirNewsletter()">
+          <input
+            type="email"
+            [placeholder]="contenido.newsletterPlaceholder"
+            aria-label="Correo electrónico"
+            required
+            [(ngModel)]="emailNewsletter"
+            name="emailNewsletter">
+
+          <button type="submit" class="boton-principal">
+            {{ contenido.newsletterBoton }}
+          </button>
+        </form>
+        @if (mensajeNewsletter) {
+          <p class="mensaje-newsletter">{{ mensajeNewsletter }}</p>
+        }
+        @if (suscrito()) {
+          <p class="mensaje-exito">
+            Gracias por suscribirte. Conectaremos el envío real en la fase backend.
+          </p>
+        }
+      </div>
+      
+      <div class="separador"></div>
+      
+      <div class="redes">
+        <h3 class="fuente-elegante">{{ contenido.redesTitulo }}</h3>
+        <p>{{ contenido.redesTexto }}</p>
+        
+        <div class="barra-rrss-iconos">
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icono-social"
+            aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icono-social"
+            aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icono-social"
+            aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>

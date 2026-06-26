@@ -1,0 +1,26 @@
+<article class="tarjeta-cristal">
+  @if (etiqueta) {
+    <span class="etiqueta">{{ etiqueta }}</span>
+  }
+  <div class="contenedor-imagen">
+    <img [src]="imagen" [alt]="titulo">
+  </div>
+  <div class="cuerpo-tarjeta">
+    <h3 class="fuente-elegante">{{ titulo }}</h3>
+    <p>{{ descripcion }}</p>
+
+    @if (ruta){
+
+      <a class="boton-leer-mas" [routerLink]="ruta">
+        Saber más
+      </a>
+
+    } @else{
+
+      <button type="button" class="boton-leer-mas" disabled>
+        Próximamente
+      </button>
+      
+    }
+  </div>
+</article>

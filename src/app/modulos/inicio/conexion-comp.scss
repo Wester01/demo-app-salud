@@ -1,0 +1,131 @@
+.seccion-conexion {
+  padding: 8rem 0; 
+  background: transparent; 
+}
+
+.bloque-conexion-cristal {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px); 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  border-radius: 30px; 
+  padding: 4rem;
+  max-width: 1000px; 
+  margin: 0 auto; 
+  display: flex;
+  align-items: center; 
+  gap: 3rem; 
+  transition: var(--transicion-suave);
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.25); 
+    box-shadow: 0 15px 30px rgba(106, 90, 205, 0.1); 
+  }
+}
+
+/* Newsletter */
+.noticias {
+  flex: 1; 
+  text-align: left; 
+  h3 { color: var(--color-acento); font-size: 2.2rem; }
+  p { font-size: 1.1rem; color: var(--color-primario); line-height: 1.8; }
+}
+
+.formulario-newsletter {
+  display: flex; 
+  margin-top: 2rem;
+  width: 100%;
+
+  input[type="email"] {
+    flex: 1; 
+    background-color: rgba(255, 255, 255, 0.6); 
+    border: 1px solid rgba(106, 90, 205, 0.2); 
+    padding: 1rem 1.5rem; 
+    border-radius: 50px; 
+    font-family: var(--fuente-principal); 
+    font-size: 1rem;
+    color: var(--color-primario); 
+    transition: var(--transicion-suave);
+
+    &::placeholder { color: rgba(106, 90, 205, 0.6); }
+    
+    &:focus {
+      outline: none; 
+      background-color: rgba(255, 255, 255, 0.9);
+      border-color: var(--color-primario); 
+      box-shadow: 0 5px 15px rgba(106, 90, 205, 0.15); 
+    }
+  }
+
+  .boton-principal {
+    background-color: var(--color-primario); 
+    color: white; 
+    border: none; 
+    padding: 1rem 2.5rem; 
+    border-radius: 50px;
+    font-family: var(--fuente-principal);
+    font-size: 1rem; 
+    cursor: pointer;
+    transition: var(--transicion-suave);
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(106, 90, 205, 0.3);
+    }
+  }
+}
+
+/* Separador visual sutil */
+.separador {
+  width: 1px; 
+  height: 150px; 
+  background-color: rgba(106, 90, 205, 0.2);
+}
+
+/* RRSS */
+.redes {
+  flex: 1;
+  text-align: center; 
+  h3 { color: var(--color-acento); font-size: 2.2rem; }
+  p { font-size: 1.1rem; color: var(--color-primario); line-height: 1.8; }
+}
+
+.barra-rrss-iconos {
+  display: flex; 
+  justify-content: center; 
+  gap: 2.5rem; 
+  margin-top: 2rem;
+
+  .icono-social {
+    color: var(--color-acento); 
+    font-size: 2rem;
+    transition: var(--transicion-suave);
+    &:hover {
+      color: var(--color-primario);
+      transform: scale(1.2) translateY(-3px); 
+    }
+  }
+}
+
+.mensaje-newsletter {
+  margin-top: 1rem;
+  color: var(--color-primario);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .bloque-conexion-cristal {
+    flex-direction: column; 
+    padding: 3rem; 
+    gap: 2rem;
+  }
+  .formulario-newsletter {
+    flex-direction: column; 
+    gap: 1rem; 
+    input[type="email"] { width: 100%; } 
+    .boton-principal { width: 100%; }
+  }
+  .separador { display: none; }
+}

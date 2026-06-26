@@ -1,0 +1,42 @@
+<div class="consultas-wrapper">
+  <header class="header-consultas">
+    <blockquote class="fuente-elegante">
+      "Que la comida sea tu alimento y el alimento tu medicina"
+      <span>— Hipócrates</span>
+    </blockquote>
+    <h2 class="titulo-seccion">Alimentación Consciente y Energética</h2>
+  </header>
+
+  <section class="metodo-cyem">
+    <div class="intro-metodo">
+      <h3>Método <span>CyEM</span></h3>
+      <p>Cuerpo y Emoción-Mente: Un binomio inseparable para tu salud.</p>
+    </div>
+
+    <div class="grid-cyem">
+      @for (paso of pasosMetodo; track paso.titulo) {
+        <div class="tarjeta-cyem-cristal">
+          <i class="fas {{paso.icon}}"></i>
+          <h4>{{paso.titulo}}</h4>
+          <p>{{paso.desc}}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="proceso-consulta">
+    <div class="info-importante">
+      <p>
+        <strong>¿Cómo trabajamos?</strong> Tras una primera consulta online, realizamos un estudio detallado. 
+        En 24h laborables recibirás tu pauta personalizada para comenzar tu transformación.
+      </p>
+    </div>
+
+    <div class="aviso-cuestionario">
+      <p><i class="fas fa-desktop"></i> Nota: El cuestionario debe realizarse desde un PC o Tablet para asegurar la calidad de las respuestas.</p>
+      <button class="boton-principal" (click)="abrirCuestionario()">
+        RELLENAR CUESTIONARIO MACROBIÓTICA
+      </button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,140 @@
+<div class="contacto-wrapper">
+  <div class="contacto-grid">
+    
+    <section class="col-formulario">
+      <div class="tarjeta-cristal-contacto">
+        <span class="tag-místico">{{ contenido.etiqueta }}</span>
+        <h2 class="fuente-elegante"> {{ contenido.titulo}} </h2>
+        <p class="sub-texto"> {{ contenido.subtitulo }} </p>
+        
+        <form
+          class="formulario-místico"
+          [formGroup]="formulario"
+          (ngSubmit)="enviarMensaje()">
+
+          <div class="input-group">
+            <input
+              type="text"
+              placeholder="Tu nombre"
+              formControlName="nombre">
+
+            @if (campoInvalido('nombre')) {
+              <small class="error-formulario">Introduce tu nombre.</small>
+            }
+          </div>
+
+          <div class="input-group">
+            <input
+              type="email"
+              placeholder="Tu email"
+              formControlName="email">
+
+            @if (campoInvalido('email')) {
+              <small class="error-formulario">Introduce un email válido.</small>
+            }
+          </div>
+
+          <div class="input-group">
+            <select formControlName="motivo">
+              <option value="" disabled>Motivo de consulta</option>
+
+              @for (motivo of contenido.motivos; track motivo) {
+                <option [value]="motivo">{{ motivo }}</option>
+              }
+            </select>
+
+            @if (campoInvalido('motivo')) {
+              <small class="error-formulario">Selecciona un motivo.</small>
+            }
+          </div>
+
+          <div class="input-group">
+            <textarea
+              placeholder="¿En qué podemos ayudarte?"
+              rows="4"
+              formControlName="mensaje">
+            </textarea>
+
+            @if (campoInvalido('mensaje')) {
+              <small class="error-formulario">El mensaje debe tener al menos 10 caracteres.</small>
+            }
+          </div>
+
+          <button
+            type="submit"
+            class="boton-brillante"
+            [disabled]="formulario.invalid || estadoEnvio() === 'enviando'">
+            <span>
+              @if (estadoEnvio() === 'enviando') {
+                Enviando...
+              } @else {
+                ENVIAR MENSAJE
+              }
+            </span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+
+          @if (estadoEnvio() === 'enviado') {
+            <p class="mensaje-exito">Mensaje preparado correctamente. Conectaremos el envío real en la fase backend.</p>
+          }
+        </form>
+        </div>
+        <div class="redes-sociales">
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/34600000000" target="_blank" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="col-cta-premium">
+      <div class="tarjeta-cta-cristal">
+        <div class="icono-flotante">
+          <i class="fas fa-feather-alt"></i>
+        </div>
+        
+        <h3 class="fuente-elegante"> {{ contenido.ctaDirectoTitulo }} </h3>
+        <p class="texto-invitacion">
+          {{ contenido.ctaDirectoTexto }}
+        </p>
+
+        <div class="opciones-directas">
+          <a
+            class="opcion-card"
+            [href]="obtenerUrlWhatsapp()"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Abrir conversación por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+            <div>
+              <span>WhatsApp Directo</span>
+              <small>Respuesta en menos de 24h</small>
+            </div>
+          </a>
+
+          <a
+            class="opcion-card"
+            [href]="obtenerUrlEmail()"
+            aria-label="Enviar email directo">
+            <i class="fas fa-envelope-open-text"></i>
+            <div>
+              <span>Email Personal</span>
+              <small> {{ contenido.email}} </small>
+            </div>
+          </a>
+        </div>
+
+        <div class="badge-exclusividad">
+          <i class="fas fa-shield-halved"></i>
+          <p>Consulta privada y confidencial bajo cita previa.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>

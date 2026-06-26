@@ -1,0 +1,89 @@
+<section class="seccion-sobre-mi">
+  <div class="contenedor-centrado">
+    
+    <div class="tarjeta-about-cristal">
+      <div class="info-personal">
+        <span class="pre-titulo">{{ contenido.preTitulo }}</span>
+
+        <h2 class="fuente-elegante">Sobre el proyecto</h2>
+
+        <p class="parrafo-destacado">
+          “{{ contenido.cita }}”
+        </p>
+
+        <h3 class="fuente-elegante">{{ contenido.titulo }}</h3>
+
+        @for (parrafo of contenido.parrafos; track parrafo) {
+          <p>{{ parrafo }}</p>
+        }
+
+        <ul class="lista-formacion">
+          @for (item of contenido.formacion; track item.titulo) {
+            <li>
+              <i [class]="item.icono"></i>
+              <span>
+                <strong>{{ item.titulo }}:</strong> {{ item.texto }}
+              </span>
+            </li>
+          }
+        </ul>
+
+        <div class="acreditaciones-footer">
+          <p>{{ contenido.acreditacion }}</p>
+        </div>
+
+        <div class="barra-rrss">
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icono-social"
+            aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icono-social"
+            aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icono-social"
+            aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contenedor-carrusel">
+      <p class="texto-patrocinio">Colaboradores y alianzas demo</p>
+
+      <div class="carrusel-track">
+        <div class="carrusel-grupo">
+          @for (colaborador of colaboradoresDemo; track colaborador.nombre) {
+            <article class="logo-patrocinador">
+              <img [src]="colaborador.logo" [alt]="colaborador.nombre">
+            </article>
+          }
+        </div>
+
+        <div class="carrusel-grupo" aria-hidden="true">
+          @for (colaborador of colaboradoresDemo; track colaborador.nombre) {
+            <article class="logo-patrocinador">
+              <img [src]="colaborador.logo" [alt]="colaborador.nombre">
+            </article>
+          }
+        </div>
+    </div>
+    </div>
+    
+  </div>
+</section>

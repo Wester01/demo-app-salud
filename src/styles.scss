@@ -1,0 +1,120 @@
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+app-root {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+
+/* Variables de Diseño - Life & Iris */
+
+/* Definición de Fuente Local */
+@font-face {
+  font-family: 'Poiret One';
+  src: url('./assets/fonts/PoiretOne-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* Evita que el texto sea invisible mientras carga */
+}
+
+
+:root {
+  /* Paleta de Colores (Azules y Morados Suaves) */
+  --color-primario: #6A5ACD;       /* Slate Blue - Tranquilidad y autoridad */
+  --color-secundario: #E6E6FA;     /* Lavender - Calidez y fondo suave */
+  --color-acento: #483D8B;         /* Dark Slate Blue - Para textos importantes */
+  --color-fondo: #f4eefc;          /* Blanco roto con matiz morado - Descanso visual */
+  --color-exito: #4CAF50;          /* Verde salud para validaciones */
+  
+  /* Tipografía */
+  --fuente-principal: 'Poiret One', system-ui, sans-serif;
+  --fuente-cuerpo: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Para legibilidad en textos largos */
+
+  /* Transiciones Suaves */
+  --transicion-suave: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  --ancho-maximo: 1200px;
+  --espaciado-lateral: 2rem;
+}
+
+/* Configuración Base de Accesibilidad */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--fuente-cuerpo);
+  background-color: var(--color-fondo);
+  color: var(--color-acento);
+  line-height: 1.6; /* Mejora la legibilidad */
+}
+
+h1, h2, h3, .fuente-elegante {
+  font-family: var(--fuente-principal);
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+/* Layout Centrado */
+.contenedor-centrado {
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: 0 var(--espaciado-lateral);
+}
+
+main {
+  min-height: 80vh; /* Asegura que el contenido ocupe espacio si hay poco texto */
+  display: block;
+}
+/* Botones con estilo cálido */
+.boton-principal {
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-family: var(--fuente-principal);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transicion-suave);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(106, 90, 205, 0.3);
+  }
+}
+
+.boton-secundario {
+  background-color: transparent;
+  border: 2px solid var(--color-primario); // Un poco más de grosor para que se vea premium
+  color: var(--color-primario);
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-family: var(--fuente-principal);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; // Transición equilibrada
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    background-color: var(--color-primario); // Se rellena con el color de marca
+    color: white; // El texto cambia para contrastar
+    transform: translateY(-3px); // Sube igual que el principal
+    box-shadow: 0 5px 15px rgba(106, 90, 205, 0.2); // Sombra más sutil que el principal
+  }
+
+  &:active {
+    transform: translateY(-1px); // Efecto de pulsación
+  }
+}
+
+.logo-img {
+  height: 50px; /* Ajusta según el diseño */
+  width: auto;
+}

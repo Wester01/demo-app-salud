@@ -1,0 +1,241 @@
+.seccion-sobre-mi {
+  padding: 4rem 0;
+  background-image: url("../../../assets/img/about2.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.tarjeta-about-cristal {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  padding: 3rem;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 4rem auto;
+
+  h2 { color: var(--color-acento); font-size: 2.2rem; }
+  p { font-size: 1.1rem; color: var(--color-primario); line-height: 1.8; margin-bottom: 30px;}
+  ul {
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto 2rem;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+  }
+
+  li {
+    margin: 0 0 0.9rem;
+    padding: 0;
+    color: var(--color-primario);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.65;
+    text-align: center;
+  }
+
+  li i {
+    display: inline-block;
+    margin-right: 0.25rem;
+    color: var(--color-acento);
+    vertical-align: middle;
+  }
+
+  li strong {
+    color: var(--color-acento);
+    font-weight: 800;
+  }
+}
+
+.barra-rrss {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+
+  .icono-social {
+    color: var(--color-acento);
+    font-size: 1.5rem;
+    transition: var(--transicion-suave);
+    &:hover {
+      color: var(--color-primario);
+      transform: scale(1.2);
+    }
+  }
+}
+
+
+/* Carrusel de colaboradores */
+.contenedor-carrusel {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 0;
+  overflow: hidden;
+  background-color: transparent;
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 15%,
+    rgba(0, 0, 0, 1) 85%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 15%,
+    rgba(0, 0, 0, 1) 85%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  .texto-patrocinio {
+    margin-bottom: 3rem;
+    text-align: center;
+    font-family: var(--fuente-principal);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    color: var(--color-acento);
+    opacity: 0.9;
+  }
+}
+
+.carrusel-track {
+  display: flex;
+  width: max-content;
+  animation: scrollInfinitoRapido 25s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+.carrusel-grupo {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 0 1.5rem;
+}
+
+.logo-patrocinador {
+  width: 200px;
+  height: 200px;
+  flex: 0 0 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(106, 90, 205, 0.1);
+  overflow: hidden;
+
+  filter: grayscale(100%) opacity(0.6);
+  transition: var(--transicion-suave);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(106, 90, 205, 0.15);
+  }
+
+  img {
+    width: 70%;
+    height: 70%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 50%;
+  }
+}
+
+@keyframes scrollInfinitoRapido {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+  .tarjeta-about-cristal {
+    padding: 2rem;
+    margin: 0 1rem 3rem;
+  }
+
+  .contenedor-carrusel {
+    padding: 2.5rem 0;
+
+    .texto-patrocinio {
+      margin-bottom: 2rem;
+      font-size: 0.72rem;
+      letter-spacing: 1.8px;
+    }
+  }
+
+  .carrusel-track {
+    animation-duration: 22s;
+  }
+
+  .carrusel-grupo {
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .logo-patrocinador {
+    width: 150px;
+    height: 150px;
+    flex-basis: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tarjeta-about-cristal {
+    padding: 1.5rem;
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+    ul {
+      max-width: 100%;
+    }
+
+    li {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  }
+
+  .barra-rrss {
+    gap: 1.25rem;
+  }
+
+  .carrusel-track {
+    animation-duration: 20s;
+  }
+
+  .carrusel-grupo {
+    gap: 1.25rem;
+  }
+
+  .logo-patrocinador {
+    width: 115px;
+    height: 115px;
+    flex-basis: 115px;
+  }
+}

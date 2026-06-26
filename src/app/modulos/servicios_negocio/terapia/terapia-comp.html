@@ -1,0 +1,32 @@
+<div class="terapias-container">
+  <header class="header-terapias">
+    <h2 class="fuente-elegante">Terapias Presenciales</h2>
+    <p>Sanación artesanal y personalizada en nuestro centro.</p>
+  </header>
+
+  <div class="grid-terapias">
+    @for (item of terapias; track item.titulo) {
+      <article class="tarjeta-terapia-cristal">
+        <div class="imagen-terapia" [style.backgroundImage]="'url(' + item.imagen + ')'"></div>
+        
+        <div class="contenido-terapia">
+          <span class="tag-presencial">Presencial</span>
+          <h3>{{item.titulo}}</h3>
+          <h4>{{item.subtitulo}}</h4>
+          <p class="desc">{{item.descripcion}}</p>
+          
+          <ul class="lista-detalles">
+            @for (detalle of item.detalles; track detalle) {
+              <li><i class="fas fa-check-circle"></i> {{detalle}}</li>
+            }
+          </ul>
+        </div>
+      </article>
+    }
+  </div>
+
+  <div class="cta-terapias">
+    <p>Todas las terapias se realizan bajo cita previa para garantizar un espacio de paz y dedicación exclusiva.</p>
+    <button class="boton-principal">RESERVAR CITA PRESENCIAL</button>
+  </div>
+</div>

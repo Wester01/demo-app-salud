@@ -1,0 +1,337 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* Layout */
+.main-sobre-mi-wrapper {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  padding-top: 140px;
+  padding-bottom: 5rem;
+  overflow: hidden;
+  color: var(--color-primario);
+  background: #9ff4f9;
+  background: radial-gradient(at center, #9ff4f938, #d5aed831);
+}
+
+.sobre-mi-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.biografia-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 5rem;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Columna visual */
+.col-visual {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.marco-místico {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100%;
+  isolation: isolate;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    bottom: -20px;
+    left: -20px;
+    z-index: -1;
+    border: 1px solid rgba(106, 90, 205, 0.3);
+    border-radius: 40px;
+    transform-origin: center;
+    animation: rotate 20s linear infinite;
+  }
+}
+
+.imagen-perfil {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    filter: sepia(10%) contrast(1.1);
+  }
+}
+
+/* Columna narrativa */
+.col-narrativa {
+  min-width: 0;
+
+  .pre-titulo {
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--color-acento);
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 4px;
+  }
+
+  h2 {
+    margin-bottom: 2rem;
+    font-size: 2.8rem;
+    line-height: 1.2;
+    text-shadow: 0 0.5px 8px rgba(241, 234, 255, 0.8);
+  }
+
+  .texto-historia {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.8;
+    text-shadow: 0 1px 5px rgba(253, 251, 255, 0.6);
+
+    .parrafo-destacado {
+      margin-bottom: 2rem;
+      padding-left: 1.5rem;
+      border-left: 3px solid var(--color-acento);
+      color: var(--color-primario);
+      font-size: 1.3rem;
+      font-style: italic;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .filosofia-box {
+    margin: 3rem 0;
+    padding: 2.5rem;
+    border: 1px solid rgba(106, 90, 205, 0.2);
+    border-left: 4px solid var(--color-acento);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: var(--transicion-suave);
+
+    h4 {
+      margin-bottom: 1.2rem;
+      color: var(--color-acento);
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--color-primario);
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 1.7;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.02);
+      border-color: rgba(106, 90, 205, 0.4);
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+}
+
+/* Formación */
+.subtitulo-formacion {
+  margin: 3rem 0 1.5rem;
+  color: var(--color-acento);
+  font-family: var(--fuente-principal);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.lista-formacion {
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem 1.5rem;
+    border-left: 2px solid var(--color-acento);
+    border-radius: 0 15px 15px 0;
+    background: rgba(255, 255, 255, 0.03);
+    transition: var(--transicion-suave);
+
+    i {
+      margin-top: 3px;
+      color: var(--color-acento);
+      font-size: 1.2rem;
+    }
+
+    span {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    &:hover {
+      transform: translateX(10px);
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+}
+
+.acreditaciones-footer {
+  margin-top: 4rem;
+  padding: 1.5rem;
+  border-top: 1px dashed rgba(106, 90, 205, 0.3);
+  text-align: center;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  opacity: 0.6;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .biografia-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .col-visual {
+    width: min(100%, 360px);
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-sobre-mi-wrapper {
+    padding-top: 110px;
+    padding-bottom: 4rem;
+  }
+
+  .sobre-mi-container {
+    padding: 0 1rem;
+  }
+
+  .col-visual {
+    width: min(100%, 320px);
+    max-width: calc(100vw - 2rem);
+  }
+
+  .marco-místico {
+    max-width: 100%;
+
+    &::after {
+      top: -10px;
+      right: -10px;
+      bottom: -10px;
+      left: -10px;
+      border-radius: 30px;
+    }
+  }
+
+  .imagen-perfil {
+    border-radius: 30px;
+  }
+
+  .col-narrativa {
+    h2 {
+      font-size: 2.2rem;
+    }
+
+    .texto-historia {
+      font-size: 1rem;
+
+      .parrafo-destacado {
+        font-size: 1.15rem;
+      }
+    }
+
+    .filosofia-box {
+      padding: 1.75rem;
+    }
+  }
+
+  .lista-formacion {
+    li {
+      padding: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .main-sobre-mi-wrapper {
+    padding-top: 100px;
+    padding-bottom: 3.5rem;
+  }
+
+  .col-visual {
+    width: min(100%, 280px);
+  }
+
+  .marco-místico {
+    &::after {
+      top: -8px;
+      right: -8px;
+      bottom: -8px;
+      left: -8px;
+      border-radius: 26px;
+    }
+  }
+
+  .imagen-perfil {
+    border-radius: 26px;
+  }
+
+  .col-narrativa {
+    h2 {
+      font-size: 1.9rem;
+    }
+
+    .pre-titulo {
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+    }
+
+    .filosofia-box {
+      padding: 1.5rem;
+    }
+  }
+
+  .acreditaciones-footer {
+    letter-spacing: 2px;
+  }
+}
+
+/* Animaciones */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

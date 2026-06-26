@@ -1,0 +1,58 @@
+<div class="main-sobre-mi-wrapper">
+  <section class="sobre-mi-container">
+    <div class="biografia-grid">
+      <div class="col-visual">
+        <div class="marco-místico">
+          <div class="imagen-perfil">
+            <img
+              src="tarjetas/life-and-iris-conceptual.webp"
+              alt="Imagen conceptual de Life & Iris">
+          </div>
+          <div class="adorno-flotante"></div>
+        </div>
+      </div>
+
+      <div class="col-narrativa">
+        <span class="pre-titulo">{{ contenido.preTitulo }}</span>
+        <h2 class="fuente-elegante">{{ contenido.titulo }}</h2>
+
+        <div class="texto-historia">
+          <p class="parrafo-destacado">
+            “{{ contenido.cita }}”
+          </p>
+
+          @for (parrafo of contenido.parrafos; track parrafo) {
+            <p>{{ parrafo }}</p>
+          }
+
+          <div class="filosofia-box">
+            <h4>La mirada de Life & Iris</h4>
+            <p>
+              Este proyecto está diseñado como una plataforma demostrativa de bienestar integrativo, educación para la salud y contenidos digitales.
+            </p>
+            <p>
+              Su enfoque combina una estética serena con una arquitectura preparada para blog, servicios, videoteca, formularios y panel de administración.
+            </p>
+          </div>
+
+          <h4 class="subtitulo-formacion">Áreas del proyecto</h4>
+
+          <ul class="lista-formacion">
+            @for (item of contenido.formacion; track item.titulo) {
+              <li>
+                <i [class]="item.icono"></i>
+                <span>
+                  <strong>{{ item.titulo }}:</strong> {{ item.texto }}
+                </span>
+              </li>
+            }
+          </ul>
+
+          <div class="acreditaciones-footer">
+            <p>{{ contenido.acreditacion }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

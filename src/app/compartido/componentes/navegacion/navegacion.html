@@ -1,0 +1,71 @@
+<header class="cabecera" [class.en-scroll]="scrolled()">
+  <div class="contenedor-centrado contenido-cabecera">
+    <div class="logo">
+      <a routerLink="/" aria-label="Ir al inicio">
+        <img src="logo/logo1.png" alt="Logo de Life & Iris" class="logo-img">
+      </a>
+    </div>
+
+    <nav class="menu-escritorio" aria-label="Navegación principal">
+      <ul>
+        <li>
+          <a
+            routerLink="/"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Inicio
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/servicios" routerLinkActive="active-link">
+            Servicios
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/sobre-mi" routerLinkActive="active-link">
+            Mi Historia
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/blog" routerLinkActive="active-link">
+            Blog
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/contacto" routerLinkActive="active-link">
+            Contacto
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <button
+      type="button"
+      class="boton-hamburguesa"
+      (click)="alternarMenu()"
+      [class.abierto]="menuAbierto()"
+      [attr.aria-expanded]="menuAbierto()"
+      aria-controls="menu-movil"
+      aria-label="Abrir o cerrar menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="overlay" [class.activo]="menuAbierto()" (click)="cerrarMenu()"></div>
+
+  <nav id="menu-movil" class="menu-movil" [class.activo]="menuAbierto()" aria-label="Navegación móvil">
+    <ul (click)="cerrarMenu()">
+      <li><a routerLink="/">Inicio</a></li>
+      <li><a routerLink="/servicios">Servicios</a></li>
+      <li><a routerLink="/sobre-mi">Mi Historia</a></li>
+      <li><a routerLink="/blog">Blog</a></li>
+      <li><a routerLink="/contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>

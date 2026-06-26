@@ -1,0 +1,153 @@
+.escuela-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.intro-escuela {
+  text-align: center;
+  margin-bottom: 4rem;
+  .slogan { 
+    font-style: italic; 
+    color: var(--color-acento); 
+    font-size: 1.4rem; 
+    margin: 1rem 0;
+  }
+}
+
+/*.tarjeta-curso-cristal {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(106, 90, 205, 0.1);
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  transition: all 0.4s ease;
+
+  &.expandida {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--color-primario);
+  }
+
+  .header-curso {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    .titulo-grupo {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      .numero-curso { font-size: 0.9rem; opacity: 0.5; letter-spacing: 2px; }
+      h3 { margin: 0; font-size: 1.3rem; letter-spacing: 1px; }
+    }
+  }
+}*/
+
+.tarjeta-curso-cristal {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(106, 90, 205, 0.1);
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+
+  &.expandida {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(106, 90, 205, 0.4); // Un poco más lavanda al abrir
+  }
+
+  .header-curso {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2; // Aseguramos que el header siempre esté encima
+    position: relative;
+
+    .titulo-grupo {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      .numero-curso { font-size: 0.9rem; opacity: 0.5; letter-spacing: 2px; }
+      h3 { margin: 0; font-size: 1.3rem; letter-spacing: 1px; color: var(--color-primario); }
+    }
+    
+    // Suavizamos el giro del icono
+    i { 
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+      color: var(--color-acento);
+    }
+  }
+}
+
+/* --- EL ACORDEÓN MÁGICO (Persiana) --- */
+.contenido-curso-wrapper {
+  // 1. ESTADO INICIAL (Persiana Cerrada)
+  display: grid;
+  grid-template-rows: 0fr; // Altura 0 de la fila
+  opacity: 0; // Invisible
+  visibility: hidden; // No interactuable
+  
+  // 2. LA TRANSICIÓN (Lenta y Elegante)
+  // cubic-bezier(0.4, 0, 0.2, 1) es la curva de "entrada/salida" suave por excelencia
+  transition: 
+    grid-template-rows 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.6s 0.1s ease, // La opacidad tarda un pelín más en empezar para dar sensación de profundidad
+    visibility 0s 0.7s; // Esperamos a que termine la persiana para ocultarlo del DOM
+
+  /* --- El contenido real dentro de la persiana --- */
+  .contenido-curso {
+    overflow: hidden; // Necesario para que el Grid calcule bien
+    padding: 0 2rem; // Espacio interno lateral (el vertical lo damos al abrir)
+    transition: padding 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* --- ESTADO EXPANDIDO (Persiana Abierta) --- */
+.expandida {
+  .header-curso i { transform: rotate(180deg); } // Giro suave del icono
+
+  .contenido-curso-wrapper {
+    grid-template-rows: 1fr; // Altura completa de la fila del contenido
+    opacity: 1; // Totalmente visible
+    visibility: visible; // Interactuable
+    transition: 
+      grid-template-rows 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.7s 0.1s ease,
+      visibility 0s; // Visible instantáneamente al empezar a abrir
+      
+    .contenido-curso {
+      padding: 0 2rem 3rem 2rem; // Recuperamos el padding inferior al abrir
+    }
+  }
+}
+
+.grid-modulos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 0 2rem 2rem;
+
+  .modulo-item {
+    display: flex;
+    gap: 10px;
+    font-size: 0.95rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(106, 90, 205, 0.05);
+    .mod-num { color: var(--color-acento); font-weight: bold; }
+  }
+}
+
+.info-adicional {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+  background: rgba(106, 90, 205, 0.05);
+  font-size: 0.85rem;
+  i { margin-right: 8px; color: var(--color-acento); }
+}

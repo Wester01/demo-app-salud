@@ -1,0 +1,45 @@
+<div class="lectura-wrapper" *ngIf="articulo as articulo">
+  <button type="button" class="btn-floating-back" routerLink="/blog/articulos">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+
+  <article class="articulo-completo">
+    <header class="articulo-hero">
+      <div class="overlay-gradiente"></div>
+      <img [src]="articulo.imagen" [alt]="articulo.titulo">
+
+      <div class="hero-info">
+        <span class="tag-categoria">{{ articulo.categoria }}</span>
+        <h1 class="fuente-elegante">{{ articulo.titulo }}</h1>
+
+        <div class="meta-lectura">
+          <span><i class="far fa-calendar"></i> {{ articulo.fecha }}</span>
+          <span><i class="far fa-clock"></i> 5 min</span>
+          <span><i class="fas fa-user-edit"></i> {{ articulo.autor }}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="cuerpo-cristal">
+      <div class="contenido-texto">
+        <p class="introduccion">{{ articulo.resumen }}</p>
+
+        <div class="texto-enriquecido">
+          @for (parrafo of articulo.contenido; track parrafo) {
+            <p>{{ parrafo }}</p>
+          }
+
+          <blockquote class="cita-mística">
+            "El bienestar no nace de promesas absolutas, sino de hábitos conscientes, escucha y acompañamiento responsable."
+          </blockquote>
+
+          <div class="tags-articulo">
+            @for (etiqueta of articulo.etiquetas; track etiqueta) {
+              <span class="tag-ai">#{{ etiqueta }}</span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>

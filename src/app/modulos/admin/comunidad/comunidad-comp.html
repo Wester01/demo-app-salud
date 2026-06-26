@@ -1,0 +1,189 @@
+<div class="comunidad-container">
+  <header class="comunidad-header">
+    <div class="titulo-seccion">
+      <h2>Círculo de Sabiduría</h2>
+      <p>Gestiona miembros, permisos y accesos de la plataforma demo.</p>
+    </div>
+
+    <div class="search-bar-glass">
+      <i class="fas fa-search"></i>
+      <input
+        type="text"
+        placeholder="Buscar miembro por nombre, email o rol..."
+        [ngModel]="busqueda()"
+        (ngModelChange)="actualizarBusqueda($event)">
+    </div>
+  </header>
+
+  <section class="comunidad-resumen">
+    <article class="resumen-card-glass">
+      <span>Total miembros</span>
+      <strong>{{ totalUsuarios() }}</strong>
+    </article>
+
+    <article class="resumen-card-glass">
+      <span>Activos</span>
+      <strong>{{ usuariosActivos() }}</strong>
+    </article>
+
+    <article class="resumen-card-glass">
+      <span>Inactivos</span>
+      <strong>{{ usuariosInactivos() }}</strong>
+    </article>
+  </section>
+
+  @if (mensajeSistema()) {
+    <div class="mensaje-sistema">
+      {{ mensajeSistema() }}
+    </div>
+  }
+
+  <section class="users-card-glass">
+    @if (usuariosFiltrados().length) {
+      <table class="comunidad-table">
+        <thead>
+          <tr>
+            <th>MIEMBRO</th>
+            <th>ROL</th>
+            <th>ESTADO</th>
+            <th>ÚLTIMO ACCESO</th>
+            <th>ACCIONES SEGURAS</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (usuario of usuariosFiltrados(); track usuario.id) {
+            <tr>
+              <td class="user-info" data-label="Miembro">
+                <div class="avatar-small">{{ usuario.nombre.charAt(0) }}</div>
+
+                <div class="details">
+                  <span class="name">{{ usuario.nombre }}</span>
+                  <span class="email">{{ usuario.email }}</span>
+                </div>
+              </td>
+
+              <td data-label="Rol">
+                <span class="badge-rol">{{ usuario.rol }}</span>
+              </td>
+
+              <td data-label="Estado">
+                <button
+                  type="button"
+                  class="badge-status"
+                  [class.active]="usuario.activo"
+                  (click)="alternarEstado(usuario)">
+                  {{ usuario.activo ? 'Activo' : 'Inactivo' }}
+                </button>
+              </td>
+
+              <td class="last-login" data-label="Último acceso">
+                {{ usuario.ultimoLogin }}
+              </td>
+
+              <td class="actions-cell" data-label="Acciones">
+                <button
+                  type="button"
+                  class="btn-action btn-reset"
+                  (click)="resetPassword(usuario)"
+                  title="Enviar reset de contraseña">
+                  <i class="fas fa-key"></i>
+                  Reset Pass
+                </button>
+
+                <button
+                  type="button"
+                  class="btn-action btn-edit"
+                  (click)="editarUsuario(usuario)"
+                  title="Editar miembro">
+                  <i class="fas fa-user-edit"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <div class="estado-vacio">
+        <i class="fas fa-users"></i>
+        <h3>No hay miembros que coincidan</h3>
+        <p>Prueba con otro nombre, email o rol.</p>
+
+        <button type="button" class="boton-principal" (click)="limpiarBusqueda()">
+          Limpiar búsqueda
+        </button>
+      </div>
+    }
+  </section>
+</div>
+
+@if (usuarioEditando()) {
+  <div class="modal-overlay" (click)="cerrarEditor()">
+    <div class="modal-content-glass" (click)="$event.stopPropagation()">
+      <header class="modal-header">
+        <h3>
+          <i class="fas fa-user-edit"></i>
+          Editar miembro
+        </h3>
+
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Cerrar editor"
+          (click)="cerrarEditor()">
+          ×
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="input-group">
+          <label for="nombre-usuario">Nombre</label>
+          <input
+            id="nombre-usuario"
+            type="text"
+            [ngModel]="usuarioEditando()?.nombre"
+            (ngModelChange)="actualizarCampo('nombre', $event)">
+        </div>
+
+        <div class="input-group">
+          <label for="email-usuario">Email</label>
+          <input
+            id="email-usuario"
+            type="email"
+            [ngModel]="usuarioEditando()?.email"
+            (ngModelChange)="actualizarCampo('email', $event)">
+        </div>
+
+        <div class="input-group">
+          <label for="rol-usuario">Rol</label>
+          <select
+            id="rol-usuario"
+            [ngModel]="usuarioEditando()?.rol"
+            (ngModelChange)="actualizarCampo('rol', $event)">
+            @for (rol of roles; track rol) {
+              <option [value]="rol">{{ rol }}</option>
+            }
+          </select>
+        </div>
+
+        <label class="switch-row">
+          <input
+            type="checkbox"
+            [ngModel]="usuarioEditando()?.activo"
+            (ngModelChange)="actualizarCampo('activo', $event)">
+          <span>Usuario activo</span>
+        </label>
+      </div>
+
+      <footer class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="cerrarEditor()">
+          Descartar
+        </button>
+
+        <button type="button" class="btn-save" (click)="guardarUsuario()">
+          Guardar cambios
+        </button>
+      </footer>
+    </div>
+  </div>
+}

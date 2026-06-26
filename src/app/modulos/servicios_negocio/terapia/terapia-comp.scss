@@ -1,0 +1,85 @@
+.terapias-container {
+  padding: 2rem;
+  animation: slideUp 0.8s ease;
+}
+
+.header-terapias {
+  text-align: center;
+  margin-bottom: 4rem;
+  h2 { font-size: 2.5rem; color: var(--color-acento); }
+  p { opacity: 0.8; letter-spacing: 1px; }
+}
+
+.grid-terapias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 4rem;
+}
+
+.tarjeta-terapia-cristal {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 0.5px 8px rgba(253, 251, 255, 0.7);
+
+  &:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(106, 90, 205, 0.15);
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .imagen-terapia {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    filter: sepia(20%) brightness(0.9); // Toque místico a las fotos
+  }
+
+  .contenido-terapia {
+    padding: 2.5rem;
+
+    .tag-presencial {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-secundario);
+      font-weight: bold;
+
+      border: solid 1px var(--color-primario);
+      border-radius: 50px;
+      background-color: var(--color-acento);
+      padding: 5px
+
+    }
+
+    h3 { font-size: 1.8rem; margin: 0.5rem 0; color: var(--color-primario); }
+    h4 { font-size: 1rem; font-style: italic; margin-bottom: 1.5rem; opacity: 0.8; }
+    .desc { font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
+
+    .lista-detalles {
+      list-style: none;
+      padding: 0;
+      li {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+        i { color: var(--color-acento); margin-right: 10px; }
+      }
+    }
+  }
+}
+
+.cta-terapias {
+  text-align: center;
+  padding: 4rem;
+  border-top: 1px solid rgba(106, 90, 205, 0.1);
+  p { max-width: 600px; margin: 0 auto 2rem; font-style: italic; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}

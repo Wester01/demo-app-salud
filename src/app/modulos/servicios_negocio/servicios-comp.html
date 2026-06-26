@@ -1,0 +1,80 @@
+<div class="main-servicios-wrapper">
+  
+  <section class="servicios-container">
+    <nav class="tabs-header">
+        <button type="button" (click)="cambiarTab('escuela')" [class.active]="tabActiva() === 'escuela'">Escuela de Salud</button>
+        <button type="button" (click)="cambiarTab('consultas')" [class.active]="tabActiva() === 'consultas'">Consultas Online</button>
+        <button type="button" (click)="cambiarTab('terapias')" [class.active]="tabActiva() === 'terapias'">Terapias</button>
+        <button type="button" (click)="cambiarTab('tienda')" [class.active]="tabActiva() === 'tienda'">Boticario</button>
+    </nav>
+    <div class="tabs-content">
+      @switch (tabActiva()) {
+        @case ('escuela') { <app-escuela-comp></app-escuela-comp> }
+        @case ('consultas') { <app-consultas-comp></app-consultas-comp> }
+        @case ('terapias') { <app-terapia-comp></app-terapia-comp> }
+        @case ('tienda') { <app-tienda-comp></app-tienda-comp> }
+      }
+    </div>
+
+    <div class="seccion-consulta-rapida">
+      <div class="bloque-cristal-contacto">
+        <div class="texto-contacto">
+          <h3 class="fuente-elegante">¿Tienes dudas sobre este servicio?</h3>
+          <p>Solicita información detallada sobre contenidos, fechas y reservas. ¡Anímate a aprender con nosotros!</p>
+        </div>
+
+        <form
+          #formularioConsulta="ngForm"
+          (ngSubmit)="enviarConsulta(formularioConsulta)"
+          class="formulario-servicios"
+        >
+          <div class="input-group">
+            <input
+              type="text"
+              placeholder="Tu nombre"
+              required
+              minlength="2"
+              [(ngModel)]="datosContacto.nombre"
+              name="nombre">
+
+            <input
+              type="email"
+              placeholder="Tu email"
+              required
+              email
+              [(ngModel)]="datosContacto.email"
+              name="email">
+          </div>
+
+          <textarea
+            required
+            minlength="10"
+            [placeholder]="'¿En qué podemos ayudarte respecto a ' + obtenerNombreTab() + '?'"
+            [(ngModel)]="datosContacto.mensaje"
+            name="mensaje">
+          </textarea>
+
+          @if (estadoEnvio() === 'enviado') {
+            <p class="mensaje-formulario exito">
+              Solicitud enviada correctamente. Se ha registrado en la demo administrativa.
+            </p>
+          }
+
+          @if (estadoEnvio() === 'error') {
+            <p class="mensaje-formulario error">
+              Revisa nombre, email y mensaje antes de enviar.
+            </p>
+          }
+
+          <button
+            type="submit"
+            class="boton-principal"
+            [disabled]="formularioConsulta.invalid || estadoEnvio() === 'enviando'">
+            {{ estadoEnvio() === 'enviando' ? 'ENVIANDO...' : 'ENVIAR SOLICITUD' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div>
