@@ -1,0 +1,1 @@
+export const API_URL = 'https://demo-app-salud-api.onrender.com/api';

@@ -1,0 +1,53 @@
+<section class="login-admin-wrapper">
+  <article class="login-card-glass">
+    <div class="marca-login">
+      <img src="logo/logo1.png" alt="Logo de Life & Iris">
+      <span>ORÁCULO ADMIN</span>
+    </div>
+
+    <div class="texto-login">
+      <p class="eyebrow">Acceso privado</p>
+      <h1 class="fuente-elegante">Panel administrativo</h1>
+      <p>
+        Inicia sesión para acceder al entorno de gestión de Life & Iris.
+      </p>
+    </div>
+
+    <form [formGroup]="formulario" (ngSubmit)="iniciarSesion()" class="formulario-login">
+      <label>
+        Email
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="admin@lifeandiris.demo"
+          autocomplete="email">
+      </label>
+
+      <label>
+        Contraseña
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+          autocomplete="current-password">
+      </label>
+
+      @if (estado() === 'error') {
+        <p class="mensaje-error">
+          Revisa las credenciales e inténtalo de nuevo.
+        </p>
+      }
+
+      <button
+        type="submit"
+        class="boton-principal"
+        [disabled]="estado() === 'enviando'">
+        {{ estado() === 'enviando' ? 'ACCEDIENDO...' : 'ENTRAR AL ORÁCULO' }}
+      </button>
+    </form>
+
+    <a routerLink="/" class="volver-publico">
+      Volver al sitio público
+    </a>
+  </article>
+</section>

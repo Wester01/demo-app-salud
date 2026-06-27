@@ -5,6 +5,7 @@ import { EditorComp } from './modulos/admin/editorContenido/editor-comp';
 import { ComunidadComp } from './modulos/admin/comunidad/comunidad-comp';
 import { AdminVideotecaComp } from './modulos/admin/adminVideoteca/admin-videoteca-comp';
 import { LayoutPublicoComp } from './compartido/layouts/layout-publico/layout-publico';
+import { adminChildGuard, adminGuard } from './nucleo/guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -67,8 +68,18 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'oraculo/login',
+    loadComponent: () =>
+      import('./modulos/admin/login-admin/login-admin-comp').then(
+        m => m.LoginAdminComp,
+      ),
+    title: 'Life & Iris | Acceso Oráculo',
+  },
+  {
     path: 'oraculo',
     component: AdminLayoutComp,
+    canActivate: [adminGuard],
+    canActivateChild: [adminChildGuard],
     children: [
       { path: '', redirectTo: 'analytics', pathMatch: 'full' },
       { path: 'analytics', component: AnalyticsComp },
