@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { AuthService } from '../../nucleo/servicios/auth.service';
+
 
 @Component({
   selector: 'app-admin-layout-comp',
@@ -8,4 +10,14 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   templateUrl: './admin-layout-comp.html',
   styleUrl: './admin-layout-comp.scss',
 })
-export class AdminLayoutComp {}
+export class AdminLayoutComp {
+
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  cerrarSesion(): void {
+    this.authService.cerrarSesion();
+    void this.router.navigate(['/oraculo/login']);
+  }
+
+}
