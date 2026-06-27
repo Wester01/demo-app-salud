@@ -18,6 +18,7 @@
 [Demo online](https://life-iris-demo.netlify.app/) ·
 [API Backend](https://demo-app-salud-api.onrender.com/api/salud) ·
 [Repositorio Backend](https://github.com/Wester01/demo-app-salud-api) ·
+[Documentación global](./docs/proyecto.md) ·
 [Portfolio](https://wester-dev.es)
 
 </div>
